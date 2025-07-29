@@ -7,6 +7,7 @@ using System.Reflection;
 using MultiShop.Infrastructure.Persistence.Context;
 using System.Reflection.Metadata;
 using MediatR;
+using MultiShop.Core.Application.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,9 +19,8 @@ builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
 builder.Services.AddDbContext<OrderContext>();
 
-//builder.Services.AddMediatR(cfg =>
-    //cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
-builder.Services.AddMediatR(typeof(AssemblyReference).Assembly);
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ServiceRegistiration).Assembly));
+
 
 
 #region
